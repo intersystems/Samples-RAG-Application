@@ -1,0 +1,32 @@
+# This is not a definitive list. There are many alternatives available from PyPi (pip) for most packages here with similar or extended functionality.
+#
+# 
+
+# Basic requirements:
+pandas                  ## Great library for data wrangling, manipulation, analysis, etc
+numpy                   ## Popular for efficient mathematical operations incl. n-dim arrays and vectors
+sentence-transformers   ## Framework for sentence, text and image embeddings with access to HuggingFace pre-trained models
+datasets                ## Loading and pre-processing public datasets published to HuggingFace
+openai                  ## We will be using OpenAI APIs for Language Models in this demo.
+
+# Custom data store:
+./wheels/intersystems_irispython-3.2.0-py3-none-any.whl
+
+# Packages for RAG orchestration:
+langchain               ## Popular framework for building LLM-based applications. Has a LOT of functionality around embeddings, retrievers, splitters and loaders.
+langchain-iris          ## Third party langchain integration to IRIS vector DBMS. Other third party integrations available from langchain-community.
+langchain_experimental
+
+# Python-native UI:
+streamlit               ## Designed for ML web app frontends, no HTML required! Uses Tornado for non-blocking IO - good for multiple long life connections.
+alive-progress          ## Progress meter used to follow the notebook embedding tasks.
+
+# Additional useful packages:
+requests                ## Ideal for making HTTP requests from Python.
+beautifulsoup4          ## Library for scraping web pages, with an HTML and XML parser.        
+duckduckgo-search       ## Search using the DuckDuckGo search engine.
+numexpr                 ## Fast numerical expression evaluator for NumPy
+
+# More advanced packages (You can remove these):
+dspy-ai                 ## Algorithmically optimizing language model prompts and weights, particularly when using LMs multiple times in a pipeline.
+ragatouille             ## Use and train retrieval methods in any RAG pipeline. Important for using ColBERT models.

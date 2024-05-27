@@ -1,0 +1,20 @@
+version: '1.0'
+
+services:
+  iris_community:
+    image: 'intersystemsdc/iris-community:latest'
+    hostname: iris-community
+    ports:
+    - 51972:1972
+    - 52775:52773
+    environment:
+      - IRIS_USERNAME=SuperUser
+      - IRIS_PASSWORD=SYS
+    volumes:
+    - ./durable/:/durable/
+    networks:
+    - iris-community-network
+
+networks:
+  iris-community-network:
+    external: false

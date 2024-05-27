@@ -1,0 +1,23 @@
+# IDE
+.vscode
+
+notebooks/keys.py
+notebooks/rag_app/keys.py
+rag/keys.py
+
+# Environment
+.venv
+notebooks/huggingface_cache
+notebooks/local_cache
+notebooks/__pycache__
+notebooks/rag_app/__pycache__
+durable
+rag/__pycache__
+
+# Other
+*.log
+notebooks/README.md
+
+# Experimental
+dspy_*.*
+beautiful_soup*.*
