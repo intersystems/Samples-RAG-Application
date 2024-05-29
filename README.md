@@ -1,6 +1,6 @@
 # RAG Samples
 
-Use this repository to explore common components of Retrieval Augmented Generation (RAG) applications. RAG allows you to bring your data to language models, without needing to train or fine-tune the model itself.
+Use this repository to explore common components of Retrieval Augmented Generation (RAG) applications. RAG allows you to bring your data to large language models, without needing to train or fine-tune the model itself.
 
 Before you start, make sure you install the following:
 * Python 3.11 or later
@@ -21,7 +21,7 @@ git clone https://github.com/intersystems/samples-rag.git
 If you do not have Git installed, download the repository and extract into a new directory.
 
 ## Create the database
-You can run a Community version of the IRIS Data Platform using Docker:
+You can run a Community version of InterSystems IRIS data platform using Docker:
 ```
 docker pull intersystemsdc/iris-community:latest
 
