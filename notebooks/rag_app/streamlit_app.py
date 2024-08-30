@@ -3,22 +3,23 @@ import streamlit as st
 from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import LLMChain, ConversationChain
 from langchain.chains.conversation.memory import ConversationSummaryMemory
-from langchain.callbacks import get_openai_callback
+from langchain_community.callbacks.manager import get_openai_callback
 from langchain_text_splitters import CharacterTextSplitter
 from langchain.docstore.document import Document
-from langchain.embeddings import OpenAIEmbeddings
-from langchain_iris import IRISVector
+from langchain_community.embeddings import OpenAIEmbeddings
 
 from sentence_transformers import SentenceTransformer
 
 from vector_search import VectorSearch
+
+import keys
 
 st.header('Vector Search', divider='orange')
 model = SentenceTransformer("avsolatorio/GIST-Embedding-v0", cache_folder='..\\notebooks\\huggingface_cache')
 
 llm = ChatOpenAI(
         temperature=0,
-        openai_api_key="KEY-ABC-DEF",
+        openai_api_key=keys.openai_key,
         model_name='gpt-3.5-turbo'
     )
 
@@ -78,7 +79,7 @@ if prompt := st.chat_input():
 
                     Example Responses: {q_and_a_docs}
 
-                    Relevant Documents: {str(relevant_docs)}
+                    Relevant Documents: {str(relevant_docs[:3])}
 
                     You should only make use of the provided Relevant Documents. They are important information belonging to the user, and it is important that any advice you give is grounded in these documents. If the documents are irrelevant to the question, simply state that you do not have the relevant information available in the database.
                 """

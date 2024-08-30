@@ -1,9 +1,8 @@
-import iris
+import intersystems_iris.dbapi._DBAPI as iris
 
 class VectorSearch:
     def __init__(self, host='localhost', port=51972, namespace='USER', username='SuperUser', password='SYS') -> None:
         self.conn = iris.connect(host, port, namespace, username, password)
-
         
     def search_by_q_and_a(self, query_embedding, top_k:int=4) -> list:
         query = f"""SELECT TOP {top_k} data.Story, data.ID

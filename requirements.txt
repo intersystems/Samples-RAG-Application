@@ -5,16 +5,17 @@
 # Basic requirements:
 pandas                  ## Great library for data wrangling, manipulation, analysis, etc
 numpy                   ## Popular for efficient mathematical operations incl. n-dim arrays and vectors
+torch==2.2.1
 sentence-transformers   ## Framework for sentence, text and image embeddings with access to HuggingFace pre-trained models
 datasets                ## Loading and pre-processing public datasets published to HuggingFace
 openai                  ## We will be using OpenAI APIs for Language Models in this demo.
+jupyter
 
 # Custom data store:
-./wheels/intersystems_irispython-3.2.0-py3-none-any.whl
+https://github.com/intersystems-community/intersystems-irispython/releases/download/3.8.0/intersystems_iris-3.8.0-py3-none-any.whl
 
 # Packages for RAG orchestration:
 langchain               ## Popular framework for building LLM-based applications. Has a LOT of functionality around embeddings, retrievers, splitters and loaders.
-langchain-iris          ## Third party langchain integration to IRIS vector DBMS. Other third party integrations available from langchain-community.
 langchain_experimental
 
 # Python-native UI:

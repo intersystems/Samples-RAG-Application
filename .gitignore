@@ -7,6 +7,7 @@ rag/keys.py
 
 # Environment
 .venv
+local-venv
 notebooks/huggingface_cache
 notebooks/local_cache
 notebooks/__pycache__
