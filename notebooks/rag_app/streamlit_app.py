@@ -12,14 +12,12 @@ from sentence_transformers import SentenceTransformer
 
 from vector_search import VectorSearch
 
-import keys
-
 st.header('Vector Search', divider='orange')
 model = SentenceTransformer("avsolatorio/GIST-Embedding-v0", cache_folder='..\\notebooks\\huggingface_cache')
 
 llm = ChatOpenAI(
         temperature=0,
-        openai_api_key=keys.openai_key,
+        openai_api_key="KEY-ABC-DEF",
         model_name='gpt-3.5-turbo'
     )
 
