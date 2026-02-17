@@ -27,7 +27,8 @@ alive-progress          ## Progress meter used to follow the notebook embedding 
 # Additional useful packages:
 requests                ## Ideal for making HTTP requests from Python.
 beautifulsoup4          ## Library for scraping web pages, with an HTML and XML parser.        
-duckduckgo-search       ## Search using the DuckDuckGo search engine.
+# duckduckgo-search       ## Search using the DuckDuckGo search engine.
+ddgs                    ## New duck duck go search
 numexpr                 ## Fast numerical expression evaluator for NumPy
 
 # More advanced packages (You can remove these):

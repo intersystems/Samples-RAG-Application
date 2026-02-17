@@ -5,11 +5,11 @@ import streamlit as st
 from dotenv import find_dotenv, load_dotenv
 
 from langchain_community.chat_models import ChatOpenAI
-from langchain.chains import LLMChain, ConversationChain
-from langchain.chains.conversation.memory import ConversationSummaryMemory
+from langchain_classic.chains import LLMChain, ConversationChain
+from langchain_classic.chains.conversation.memory import ConversationSummaryMemory
 from langchain_community.callbacks.manager import get_openai_callback
 from langchain_text_splitters import CharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_classic.docstore.document import Document
 from langchain_community.embeddings import OpenAIEmbeddings
 
 from sentence_transformers import SentenceTransformer
@@ -53,12 +53,12 @@ for msg in st.session_state.messages:
     if msg["role"] == "assistant":
         st.chat_message(msg["role"]).write(msg["content"])
     else:
-        st.chat_message(msg["role"]).write(msg["content"].replace("$", "\$"))
+        st.chat_message(msg["role"]).write(msg["content"].replace("$", "\\$"))
 
 if prompt := st.chat_input():
 
     st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt.replace("$", "\$")) # Escaping '$', otherwise Streamlit can interpret it as Latex
+    st.chat_message("user").write(prompt.replace("$", "\\$")) # Escaping '$', otherwise Streamlit can interpret it as Latex
 
     # Instantiate this custom Python class (vector_search.py) which gives us SQL access to the persisted vector embeddings.
     peristent_DB = VectorSearch()
@@ -95,4 +95,4 @@ if prompt := st.chat_input():
         resp = conversation_sum(template)
 
         st.session_state.messages.append({"role": "assistant", "content": resp['response']})
-        st.write(resp['response'].replace("$", "\$"))
+        st.write(resp['response'].replace("$", "\\$"))
