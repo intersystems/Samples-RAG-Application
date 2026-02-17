@@ -1,4 +1,8 @@
+import os
+
 import streamlit as st
+
+from dotenv import find_dotenv, load_dotenv
 
 from langchain_community.chat_models import ChatOpenAI
 from langchain.chains import LLMChain, ConversationChain
@@ -12,14 +16,21 @@ from sentence_transformers import SentenceTransformer
 
 from vector_search import VectorSearch
 
+load_dotenv(find_dotenv(usecwd=True), override=True)
+
 st.header('Vector Search', divider='orange')
 model = SentenceTransformer("avsolatorio/GIST-Embedding-v0", cache_folder='..\\notebooks\\huggingface_cache')
 
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    st.error("Missing OPENAI_API_KEY. Set it in your environment or in .env")
+    st.stop()
+
 llm = ChatOpenAI(
-        temperature=0,
-        openai_api_key="KEY-ABC-DEF",
-        model_name='gpt-3.5-turbo'
-    )
+    temperature=0,
+    openai_api_key=openai_api_key,
+    model_name=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+)
 
 # Create chain. We are using Summary Memory for fewer tokens.
 conversation_sum = ConversationChain(
@@ -31,7 +42,7 @@ conversation_sum = ConversationChain(
 with st.sidebar:
     st.header('Settings', divider='orange')
     choose_embed = st.radio("Choose an embedding model:",("all-MiniLM-L6-v2","avsolatorio/GIST-Embedding-v0","None"),index=1)
-    choose_LM = st.radio("Choose a language model:",("gpt-3.5-turbo","None"),index=0)
+    choose_LM = st.radio("Choose a language model:",("gpt-4.1-mini","None"),index=0)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [

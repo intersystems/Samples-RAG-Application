@@ -5,11 +5,12 @@
 # Basic requirements:
 pandas                  ## Great library for data wrangling, manipulation, analysis, etc
 numpy                   ## Popular for efficient mathematical operations incl. n-dim arrays and vectors
-torch==2.2.1
+torch
 sentence-transformers   ## Framework for sentence, text and image embeddings with access to HuggingFace pre-trained models
 datasets                ## Loading and pre-processing public datasets published to HuggingFace
 openai                  ## We will be using OpenAI APIs for Language Models in this demo.
 jupyter
+python-dotenv           ## Load environment variables from a local .env file
 
 # Custom data store:
 https://github.com/intersystems-community/intersystems-irispython/releases/download/3.8.0/intersystems_iris-3.8.0-py3-none-any.whl
@@ -30,4 +31,4 @@ numexpr                 ## Fast numerical expression evaluator for NumPy
 
 # More advanced packages (You can remove these):
 dspy-ai                 ## Algorithmically optimizing language model prompts and weights, particularly when using LMs multiple times in a pipeline.
-ragatouille             ## Use and train retrieval methods in any RAG pipeline. Important for using ColBERT models.
+# ragatouille             ## Use and train retrieval methods in any RAG pipeline. Important for using ColBERT models.
