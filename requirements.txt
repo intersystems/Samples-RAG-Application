@@ -17,6 +17,7 @@ https://github.com/intersystems-community/intersystems-irispython/releases/downl
 
 # Packages for RAG orchestration:
 langchain               ## Popular framework for building LLM-based applications. Has a LOT of functionality around embeddings, retrievers, splitters and loaders.
+langchain-classic
 langchain_experimental
 
 # Python-native UI:
