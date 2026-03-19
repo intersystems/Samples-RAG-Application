@@ -1,25 +1,36 @@
+import os
+
 import streamlit as st
 
+from dotenv import find_dotenv, load_dotenv
+
 from langchain_community.chat_models import ChatOpenAI
-from langchain.chains import LLMChain, ConversationChain
-from langchain.chains.conversation.memory import ConversationSummaryMemory
+from langchain_classic.chains import LLMChain, ConversationChain
+from langchain_classic.chains.conversation.memory import ConversationSummaryMemory
 from langchain_community.callbacks.manager import get_openai_callback
 from langchain_text_splitters import CharacterTextSplitter
-from langchain.docstore.document import Document
+from langchain_classic.docstore.document import Document
 from langchain_community.embeddings import OpenAIEmbeddings
 
 from sentence_transformers import SentenceTransformer
 
 from vector_search import VectorSearch
 
+load_dotenv(find_dotenv(usecwd=True), override=True)
+
 st.header('Vector Search', divider='orange')
 model = SentenceTransformer("avsolatorio/GIST-Embedding-v0", cache_folder='..\\notebooks\\huggingface_cache')
 
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    st.error("Missing OPENAI_API_KEY. Set it in your environment or in .env")
+    st.stop()
+
 llm = ChatOpenAI(
-        temperature=0,
-        openai_api_key="KEY-ABC-DEF",
-        model_name='gpt-3.5-turbo'
-    )
+    temperature=0,
+    openai_api_key=openai_api_key,
+    model_name=os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+)
 
 # Create chain. We are using Summary Memory for fewer tokens.
 conversation_sum = ConversationChain(
@@ -31,7 +42,7 @@ conversation_sum = ConversationChain(
 with st.sidebar:
     st.header('Settings', divider='orange')
     choose_embed = st.radio("Choose an embedding model:",("all-MiniLM-L6-v2","avsolatorio/GIST-Embedding-v0","None"),index=1)
-    choose_LM = st.radio("Choose a language model:",("gpt-3.5-turbo","None"),index=0)
+    choose_LM = st.radio("Choose a language model:",("gpt-4.1-mini","None"),index=0)
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = [
@@ -42,12 +53,12 @@ for msg in st.session_state.messages:
     if msg["role"] == "assistant":
         st.chat_message(msg["role"]).write(msg["content"])
     else:
-        st.chat_message(msg["role"]).write(msg["content"].replace("$", "\$"))
+        st.chat_message(msg["role"]).write(msg["content"].replace("$", "\\$"))
 
 if prompt := st.chat_input():
 
     st.session_state.messages.append({"role": "user", "content": prompt})
-    st.chat_message("user").write(prompt.replace("$", "\$")) # Escaping '$', otherwise Streamlit can interpret it as Latex
+    st.chat_message("user").write(prompt.replace("$", "\\$")) # Escaping '$', otherwise Streamlit can interpret it as Latex
 
     # Instantiate this custom Python class (vector_search.py) which gives us SQL access to the persisted vector embeddings.
     peristent_DB = VectorSearch()
@@ -84,4 +95,4 @@ if prompt := st.chat_input():
         resp = conversation_sum(template)
 
         st.session_state.messages.append({"role": "assistant", "content": resp['response']})
-        st.write(resp['response'].replace("$", "\$"))
+        st.write(resp['response'].replace("$", "\\$"))
